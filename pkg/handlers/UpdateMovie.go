@@ -3,7 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 
@@ -18,7 +18,7 @@ func (h handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 
 	// Read request body
 	defer r.Body.Close()
-	body, err := ioutil.ReadAll(r.Body)
+	body, err := io.ReadAll(r.Body)
 
 	if err != nil {
 		log.Fatalln(err)
