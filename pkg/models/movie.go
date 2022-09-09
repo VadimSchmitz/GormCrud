@@ -1,9 +1,8 @@
 package models
 
 type Movie struct {
-	Id      int     `json:"id" gorm:"primaryKey"`
-	Imdb_id string  `json:"imdb_id"`
+	IMDb_id string  `gorm:"column:IMDb_id;primaryKey" json:"imdb_id"`
 	Title   string  `json:"title"`
-	Rating  float32 `json:"rating"`
+	Rating  float64 `json:"rating"`
 	Year    int     `json:"year"`
 }

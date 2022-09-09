@@ -22,7 +22,7 @@ func (h handler) AddMovie(w http.ResponseWriter, r *http.Request) {
 	var movie models.Movie
 	json.Unmarshal(body, &movie)
 
-	// Append to the Books table
+	// Append to the movie table
 	if result := h.DB.Create(&movie); result.Error != nil {
 		fmt.Println(result.Error)
 	}

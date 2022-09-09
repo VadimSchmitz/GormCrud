@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/tutorials/go/crud/pkg/models"
@@ -15,7 +14,7 @@ import (
 func (h handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 	// Read dynamic id parameter
 	vars := mux.Vars(r)
-	id, _ := strconv.Atoi(vars["id"])
+	id := vars["id"]
 
 	// Read request body
 	defer r.Body.Close()
@@ -30,11 +29,11 @@ func (h handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 
 	var movie models.Movie
 
-	if result := h.DB.First(&movie, id); result.Error != nil {
+	if result := h.DB.Where("imdb_id = ?", id).Find(&movie); result.Error != nil {
 		fmt.Println(result.Error)
 	}
 
-	movie.Imdb_id = updatedMovie.Imdb_id
+	movie.IMDb_id = updatedMovie.IMDb_id
 	movie.Title = updatedMovie.Title
 	movie.Rating = updatedMovie.Rating
 	movie.Year = updatedMovie.Year

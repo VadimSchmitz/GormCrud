@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/tutorials/go/crud/pkg/models"
@@ -13,13 +12,13 @@ import (
 func (h handler) DeleteMovie(w http.ResponseWriter, r *http.Request) {
 	// Read the dynamic id parameter
 	vars := mux.Vars(r)
-	id, _ := strconv.Atoi(vars["id"])
+	id := vars["id"]
 
 	// Find the movie by Id
 
 	var movie models.Movie
 	
-	if result := h.DB.First(&movie, id); result.Error != nil {
+	if result := h.DB.Where("imdb_id = ?", id).Find(&movie); result.Error != nil {
 		fmt.Println(result.Error)
 	}
 
