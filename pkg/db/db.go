@@ -39,11 +39,7 @@ func Init() *gorm.DB {
         log.Fatalln(err)
     }
 
-	//Make db migrations if they do not excist
-	// db.AutoMigrate(&Person{})
-	// db.AutoMigrate(&Book{})
-	db.AutoMigrate(&models.Book{})
-
+	db.AutoMigrate(&models.Movie{})
 
     return db
 }

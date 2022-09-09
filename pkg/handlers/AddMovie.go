@@ -6,11 +6,11 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	
+
 	"github.com/tutorials/go/crud/pkg/models"
 )
 
-func (h handler) AddBook(w http.ResponseWriter, r *http.Request) {
+func (h handler) AddMovie(w http.ResponseWriter, r *http.Request) {
 	// Read to request body
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
@@ -19,11 +19,11 @@ func (h handler) AddBook(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(err)
 	}
 	
-	var book models.Book
-	json.Unmarshal(body, &book)
+	var movie models.Movie
+	json.Unmarshal(body, &movie)
 
 	// Append to the Books table
-	if result := h.DB.Create(&book); result.Error != nil {
+	if result := h.DB.Create(&movie); result.Error != nil {
 		fmt.Println(result.Error)
 	}
 

@@ -12,7 +12,7 @@ import (
 	"github.com/tutorials/go/crud/pkg/models"
 )
 
-func (h handler) UpdateBook(w http.ResponseWriter, r *http.Request) {
+func (h handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 	// Read dynamic id parameter
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
@@ -25,20 +25,21 @@ func (h handler) UpdateBook(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(err)
 	}
 
-	var updatedBook models.Book
-	json.Unmarshal(body, &updatedBook)
+	var updatedMovie models.Movie
+	json.Unmarshal(body, &updatedMovie)
 
-	var book models.Book
+	var movie models.Movie
 
-	if result := h.DB.First(&book, id); result.Error != nil {
+	if result := h.DB.First(&movie, id); result.Error != nil {
 		fmt.Println(result.Error)
 	}
 
-	book.Title = updatedBook.Title
-	book.Author = updatedBook.Author
-	book.Desc = updatedBook.Desc
+	movie.Imdb_id = updatedMovie.Imdb_id
+	movie.Title = updatedMovie.Title
+	movie.Rating = updatedMovie.Rating
+	movie.Year = updatedMovie.Year
 
-	h.DB.Save(&book)
+	h.DB.Save(&movie)
 
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
