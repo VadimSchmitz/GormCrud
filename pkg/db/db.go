@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/tutorials/go/crud/pkg/models"
+	"github.com/VadimSchmitz/GormCrud/pkg/models"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )

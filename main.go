@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/tutorials/go/crud/pkg/db"
-	"github.com/tutorials/go/crud/pkg/handlers"
+	"github.com/VadimSchmitz/GormCrud/pkg/db"
+	"github.com/VadimSchmitz/GormCrud/pkg/handlers"
 )
 
 func main() {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/tutorials/go/crud/pkg/models"
+	"github.com/VadimSchmitz/GormCrud/pkg/models"
 )
 
 func (h handler) GetAllMovies(w http.ResponseWriter, r *http.Request) {

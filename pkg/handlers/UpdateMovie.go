@@ -8,7 +8,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/tutorials/go/crud/pkg/models"
+	"github.com/VadimSchmitz/GormCrud/pkg/models"
 )
 
 func (h handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
