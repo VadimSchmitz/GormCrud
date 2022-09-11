@@ -18,6 +18,8 @@ func main() {
 
 	router.HandleFunc("/movies", h.GetAllMovies).Methods(http.MethodGet)
 	router.HandleFunc("/movies/{id}", h.GetMovie).Methods(http.MethodGet)
+	router.HandleFunc("/titles", h.GetAllMovieTitles).Methods(http.MethodGet)
+
 	router.HandleFunc("/movies", h.AddMovie).Methods(http.MethodPost)
 	router.HandleFunc("/movies/{id}", h.UpdateMovie).Methods(http.MethodPut)
 	router.HandleFunc("/movies/{id}", h.DeleteMovie).Methods(http.MethodDelete)
