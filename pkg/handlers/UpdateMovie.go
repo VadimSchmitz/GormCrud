@@ -12,11 +12,9 @@ import (
 )
 
 func (h handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
-	// Read dynamic id parameter
 	vars := mux.Vars(r)
 	id := vars["id"]
 
-	// Read request body
 	defer r.Body.Close()
 	body, err := io.ReadAll(r.Body)
 

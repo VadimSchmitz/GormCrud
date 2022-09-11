@@ -30,5 +30,6 @@ func (h handler) AddMovie(w http.ResponseWriter, r *http.Request) {
 	// Send a 201 created response
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode("Created")
+	// {"id":"tt0368226","name":"The Room","year":"2003","score":"3.7"}
+	json.NewEncoder(w).Encode(movie)
 }
