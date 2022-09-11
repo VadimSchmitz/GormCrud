@@ -1,7 +1,6 @@
 package db
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/VadimSchmitz/GormCrud/pkg/models"
@@ -14,13 +13,7 @@ func Init() *gorm.DB {
 
 	if err != nil {
 		log.Fatal(err)
-	} else {
-		fmt.Println("successfully connected to the databse!")
 	}
-
-    if err != nil {
-        log.Fatalln(err)
-    }
 
 	db.AutoMigrate(&models.Movie{})
 

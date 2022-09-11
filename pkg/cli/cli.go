@@ -20,10 +20,6 @@ func CliHandler() {
 	if arguments[0] == "summaries" {
 		url := "http://www.omdbapi.com/?i=tt3896198&apikey=183b9a26"
 
-		type title struct{
-			Title string `json:"title"`
-		}
-
 		req, err := http.NewRequest(http.MethodGet, url, nil)
 		if err != nil {
 			log.Fatal(err)
@@ -37,6 +33,7 @@ func CliHandler() {
 		if getErr != nil {
 			log.Fatal(getErr)
 		}
+
 		if res.Body != nil {
 			defer res.Body.Close()
 		}
@@ -46,17 +43,20 @@ func CliHandler() {
 			log.Fatal(readErr)
 		}
 
+		type title struct{
+			Title string `json:"title"`
+		}
 		
 		title1 := title{}
 		jsonErr := json.Unmarshal(body, &title1)
 		if jsonErr != nil {
 			log.Fatal(jsonErr)
 		}
+
+		//loop over all the entries of imdb_id
+		
 	
 		fmt.Println(title1)
 		fmt.Println("Summaries added")
 	}
-
-
-
 }
