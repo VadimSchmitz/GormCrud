@@ -5,4 +5,5 @@ type Movie struct {
 	Title        string  `json:"name"`
 	Year         int     `json:"year"`
 	Rating       float64 `json:"score"`
+	Plot_summary string  `json:"plot"`
 }

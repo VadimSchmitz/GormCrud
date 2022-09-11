@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/VadimSchmitz/GormCrud/pkg/cli"
 	"github.com/VadimSchmitz/GormCrud/pkg/db"
 	"github.com/VadimSchmitz/GormCrud/pkg/handlers"
 	"github.com/gorilla/mux"
@@ -10,6 +11,8 @@ import (
 
 func main() {
 	DB := db.Init()
+	cli.CliHandler()
+
 	h := handlers.New(DB)
 	router := mux.NewRouter()
 

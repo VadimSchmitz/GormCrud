@@ -10,7 +10,6 @@ import (
 )
 
 func Init() *gorm.DB {
-	//open connection to db
 	db, err := gorm.Open(sqlite.Open("movies.db"), &gorm.Config{})
 
 	if err != nil {
