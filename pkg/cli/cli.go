@@ -8,9 +8,11 @@ import (
 	"net/http"
 	"os"
 	"time"
+	// "github.com/VadimSchmitz/GormCrud/pkg/handlers"
 )
 
-func CliHandler() {
+func CliHandler(done chan bool) {
+	fmt.Println("Welcome to the CLI")
 	arguments := os.Args[1:]
 
 	if len(arguments) == 0 {
@@ -18,6 +20,9 @@ func CliHandler() {
 	}
 
 	if arguments[0] == "summaries" {
+		//slice of strings to hold the movie titles returned from GetAllMovieTitles()
+		// allTitles := GetAllMovieTitles(h)
+		
 		url := "http://www.omdbapi.com/?i=tt3896198&apikey=183b9a26"
 
 		req, err := http.NewRequest(http.MethodGet, url, nil)
@@ -55,8 +60,9 @@ func CliHandler() {
 
 		//loop over all the entries of imdb_id
 		
-	
 		fmt.Println(title1)
 		fmt.Println("Summaries added")
+
+		done <- true
 	}
 }
