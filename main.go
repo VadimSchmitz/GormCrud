@@ -22,9 +22,13 @@ func main() {
 	router.HandleFunc("/movies/{id}", h.UpdateMovie).Methods(http.MethodPut)
 	router.HandleFunc("/movies/{id}", h.DeleteMovie).Methods(http.MethodDelete)
 
+    done := make(chan bool)
+
 	go func() {
 		http.ListenAndServe(":8090", router)
+        done <- false
 	}()
 
-	cli.CliHandler()
+    go cli.CliHandler(done)
+    <-done
 }
