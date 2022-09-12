@@ -25,7 +25,7 @@ func main() {
     done := make(chan bool)
 
 	go func() {
-		http.ListenAndServe(":8090", router)
+		http.ListenAndServe("127.0.0.1:8090", router)
         done <- false
 	}()
 
