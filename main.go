@@ -19,7 +19,7 @@ func main() {
 	router.HandleFunc("/ids", h.GetAllMovieTitles).Methods(http.MethodGet)
 
 	router.HandleFunc("/movies", h.AddMovie).Methods(http.MethodPost)
-	router.HandleFunc("/movies/{id}", h.UpdateMovie).Methods(http.MethodPut)
+	router.HandleFunc("/movies/{id}", h.UpdateMovie).Methods(http.MethodPatch)
 	router.HandleFunc("/movies/{id}", h.DeleteMovie).Methods(http.MethodDelete)
 
     done := make(chan bool)

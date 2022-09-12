@@ -31,12 +31,30 @@ func (h handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(result.Error)
 	}
 
-	movie.IMDb_id = updatedMovie.IMDb_id
-	movie.Title = updatedMovie.Title
-	movie.Rating = updatedMovie.Rating
-	movie.Year = updatedMovie.Year
+	fmt.Println(movie)
 
-	h.DB.Save(&movie)
+	if updatedMovie.IMDb_id != "" {
+		movie.IMDb_id = updatedMovie.IMDb_id
+	}
+	if updatedMovie.Title != "" {
+		movie.Title = updatedMovie.Title
+	}
+	if updatedMovie.Year != 0 {
+		movie.Year = updatedMovie.Year
+	}
+	if updatedMovie.Rating != 0 {
+		movie.Rating = updatedMovie.Rating
+	}
+	if updatedMovie.Plot_summary != "" {
+		movie.Plot_summary = updatedMovie.Plot_summary
+	}
+
+	h.DB.Model(&movie).Updates(models.Movie{
+		IMDb_id: movie.IMDb_id,
+		Title: movie.Title, 
+		Year: movie.Year, 
+		Rating: movie.Rating, 
+		Plot_summary: movie.Plot_summary})
 
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
