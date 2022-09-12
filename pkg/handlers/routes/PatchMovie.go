@@ -31,8 +31,6 @@ func (h handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(result.Error)
 	}
 
-	fmt.Println(movie)
-
 	if updatedMovie.IMDb_id != "" {
 		movie.IMDb_id = updatedMovie.IMDb_id
 	}
