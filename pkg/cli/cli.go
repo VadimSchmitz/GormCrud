@@ -1,13 +1,10 @@
 package cli
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
-	"log"
-	"net/http"
 	"os"
 
+	handlers "github.com/VadimSchmitz/GormCrud/pkg/handlers/externalApi"
 	"github.com/VadimSchmitz/GormCrud/pkg/models"
 )
 
@@ -20,32 +17,21 @@ func CliHandler(done chan bool) {
 
 	if arguments[0] == "summaries" {
 		
-		response, apiError := http.Get("http://localhost:8090/titles")
 
-		if apiError != nil {
-			log.Fatal(apiError)
-		}
+		var IMDb_id []*models.IMDb_id		
+		idUrl := "http://localhost:8090/ids"
+		handlers.ProcessRequest(idUrl, &IMDb_id)
 
-		defer response.Body.Close()
+		var Plot_summary *models.Plot		
+		omdbUrl := "http://www.omdbapi.com/?i=tt3896198&apikey=183b9a26"
+		handlers.ProcessRequest(omdbUrl, &Plot_summary)
 
-		body, err := io.ReadAll(response.Body)
-		if err != nil {
-			panic(err.Error())
-		}
-
-		var titles []models.Title		
-
-		err = json.Unmarshal(body, &titles)
-		if err != nil {
-			panic(err.Error())
-		}
 
 		//loop over all the slice of titles
-		for _, title := range titles {
-			fmt.Println(title.Title)
-			
+		for _, id := range IMDb_id {
+			fmt.Println(id.IMDb_id)
 		}
-			
-			done <- true
+
+		done <- true
 	}
 }

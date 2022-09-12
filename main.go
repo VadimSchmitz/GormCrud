@@ -5,7 +5,7 @@ import (
 
 	"github.com/VadimSchmitz/GormCrud/pkg/cli"
 	"github.com/VadimSchmitz/GormCrud/pkg/db"
-	"github.com/VadimSchmitz/GormCrud/pkg/handlers"
+	handlers "github.com/VadimSchmitz/GormCrud/pkg/handlers/routes"
 	"github.com/gorilla/mux"
 )
 
@@ -16,7 +16,7 @@ func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/movies", h.GetAllMovies).Methods(http.MethodGet)
 	router.HandleFunc("/movies/{id}", h.GetMovie).Methods(http.MethodGet)
-	router.HandleFunc("/titles", h.GetAllMovieTitles).Methods(http.MethodGet)
+	router.HandleFunc("/ids", h.GetAllMovieTitles).Methods(http.MethodGet)
 
 	router.HandleFunc("/movies", h.AddMovie).Methods(http.MethodPost)
 	router.HandleFunc("/movies/{id}", h.UpdateMovie).Methods(http.MethodPut)

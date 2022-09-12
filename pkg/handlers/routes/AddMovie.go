@@ -11,7 +11,6 @@ import (
 )
 
 func (h handler) AddMovie(w http.ResponseWriter, r *http.Request) {
-	// Read to request body
 	defer r.Body.Close()
 	body, err := io.ReadAll(r.Body)
 
