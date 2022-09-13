@@ -14,6 +14,7 @@ func (h handler) GetMovie(w http.ResponseWriter, r *http.Request) {
 	var movie models.Movie
 	
 	if result := h.DB.Where("imdb_id = ?", id).First(&movie); result.Error != nil {
+		w.WriteHeader(http.StatusNotFound)
 		json.NewEncoder(w).Encode(http.StatusNotFound)
 	} else {
 		w.Header().Add("Content-Type", "application/json")
