@@ -43,8 +43,8 @@ func (h handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 	if updatedMovie.Rating != 0 {
 		movie.Rating = updatedMovie.Rating
 	}
-	if updatedMovie.Plot_summary != "" {
-		movie.Plot_summary = updatedMovie.Plot_summary
+	if updatedMovie.Summary != "" {
+		movie.Summary = updatedMovie.Summary
 	}
 
 	h.DB.Model(&movie).Updates(models.Movie{
@@ -52,7 +52,7 @@ func (h handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 		Title: movie.Title, 
 		Year: movie.Year, 
 		Rating: movie.Rating, 
-		Plot_summary: movie.Plot_summary})
+		Summary: movie.Summary})
 
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)

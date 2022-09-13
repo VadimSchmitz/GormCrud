@@ -28,7 +28,7 @@ func CliHandler(done chan bool) {
 		results := make(chan string, numJobs)
 
 		for w := 1; w <= 5; w++ {
-			go worker(w, jobs, results)
+			go FetchAndPatch(w, jobs, results)
 		}
 
 		for _, imdb_id := range IMDb_id {
@@ -45,7 +45,7 @@ func CliHandler(done chan bool) {
 	}
 }
 
-func worker(wId int, jobs <-chan *models.IMDb_id, results chan<- string) {
+func FetchAndPatch(wId int, jobs <-chan *models.IMDb_id, results chan<- string) {
 	for imdb_id := range jobs {
 		fmt.Printf("Worker %d getting summary for %s \n", wId, imdb_id.IMDb_id)
 
@@ -62,7 +62,6 @@ func worker(wId int, jobs <-chan *models.IMDb_id, results chan<- string) {
 
 		client := &http.Client{}
 		client.Do(req)
-
 		
 		results <- imdb_id.IMDb_id
 	}
