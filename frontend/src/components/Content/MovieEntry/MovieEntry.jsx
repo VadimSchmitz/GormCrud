@@ -4,10 +4,10 @@ import "./MovieEntry.css";
 export default function MovieEntry({ id, title, year, rating, plot }) {
   return (
     <div className="mb-1">
-      <div id="accordionFlushExample w-max">
+      <div>
         <div className="bg-white">
           <div
-            className="accordion-button collapsed file:relative flex items-center w-full py-4 px-5 text-base text-gray-800 text-left bg-white transition focus:outline-none"
+            className="accordion-button collapsed file:relative flex items-center w-full py-6 px-5 text-base text-gray-800 text-left bg-white transition focus:outline-none"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target={`#flush-${id}`}
@@ -15,8 +15,8 @@ export default function MovieEntry({ id, title, year, rating, plot }) {
             aria-controls={`flush-${id}`}>
             <div className="flex-1">
               <div className="flex">
-                <button className="link my-auto pr-2 font-bold">{title}</button>
-                <p>({year})</p>
+                <button className="link my-auto pr-2 font-bold text-left">{title}</button>
+                <p className="my-auto">({year})</p>
               </div>
               <div className="flex">
                 <svg
@@ -33,7 +33,7 @@ export default function MovieEntry({ id, title, year, rating, plot }) {
           </div>
           <div id={`flush-${id}`} className="accordion-collapse collapse" aria-labelledby="flush-1">
             <div className="py-4 px-5">
-              <h2 className="font-semibold">Plot</h2>
+              <h2>Plot:</h2>
               {plot}
             </div>
           </div>

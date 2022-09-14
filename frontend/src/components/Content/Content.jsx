@@ -1,13 +1,10 @@
 import MovieEntry from "./MovieEntry/MovieEntry";
 import "./Content.css";
 
-export default function Content() {
+export default function Content({ movies }) {
+  console.log(movies);
   return (
-    <div className="content-card">
-      <h1>Movies in the IMDb database</h1>
-      <p>This is a list of all the movies currently stored in the database</p>
-      <hr></hr>
-
+    <div>
       <MovieEntry
         id="5"
         title="The Chronicles of Narnia: The Lion, the Witch and the Wardrobe"
