@@ -1,7 +1,7 @@
 import { Formik, Form } from "formik";
 import FormikField from "./FormikField";
 
-export default function MovieForm() {
+export default function MovieForm({ setMovies }) {
   return (
     <div>
       <h1>Add a movie</h1>
@@ -14,8 +14,9 @@ export default function MovieForm() {
           summary: ""
         }}
         onSubmit={async (values) => {
-          await new Promise((r) => setTimeout(r, 500));
-          console.log(JSON.stringify(values, null, 2));
+          await new Promise((r) => setTimeout(r, 20));
+          
+          setMovies((movies) => [...movies, values]);
         }}>
         <Form className="flex-col">
           <FormikField id="imdb_id" label="IMDb_id" placeholder="231" type="" />
@@ -29,7 +30,7 @@ export default function MovieForm() {
           <button
             className="max-w-[160px] py-2 px-3 bg-blue-500 hover:bg-blue-700 text-white font-bold"
             type="submit">
-            Add movie
+            Add a movie
           </button>
         </Form>
       </Formik>

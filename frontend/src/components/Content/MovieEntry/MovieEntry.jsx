@@ -1,7 +1,6 @@
 import "tw-elements";
-import "./MovieEntry.css";
 
-export default function MovieEntry({ id, title, year, rating, plot }) {
+export default function MovieEntry({ id, title, rating, year, summary }) {
   return (
     <div className="mb-1">
       <div>
@@ -34,7 +33,7 @@ export default function MovieEntry({ id, title, year, rating, plot }) {
           <div id={`flush-${id}`} className="accordion-collapse collapse" aria-labelledby="flush-1">
             <div className="py-4 px-5">
               <h2>Plot:</h2>
-              {plot}
+              {summary}
             </div>
           </div>
         </div>
