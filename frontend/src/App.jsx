@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Content from "./components/Content/Content";
 import MovieForm from "./components/AddMovieForm/MovieForm";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -14,13 +15,18 @@ function App() {
   }, []);
 
   return (
-    <div className="content mx-auto bg-[#F8F8F8] p-5 w-9/12 mt-10 mb-16">
-      <h1>Movies in the IMDb database</h1>
-      <p>This is a list of all the movies currently stored in the database</p>
-      <hr></hr>
-      <MovieForm setMovies={setMovies} />
-      <hr></hr>
-      <Content movies={movies} />
+    <div>
+      <div>
+        <NavBar />
+      </div>
+      <div className="content mx-auto bg-[#F8F8F8] p-5 w-9/12 mb-16">
+        <h1>Movies in the IMDb database</h1>
+        <p>This is a list of all the movies currently stored in the database</p>
+        <hr></hr>
+        <MovieForm setMovies={setMovies} />
+        <hr></hr>
+        <Content movies={movies} />
+      </div>
     </div>
   );
 }
