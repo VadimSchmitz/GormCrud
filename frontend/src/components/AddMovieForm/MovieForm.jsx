@@ -15,18 +15,26 @@ export default function MovieForm({ setMovies }) {
         }}
         onSubmit={async (values) => {
           await new Promise((r) => setTimeout(r, 20));
-          
+          const requestOptions = {
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify(values)
+          };
+          fetch("http://localhost:8090/movies", requestOptions).then((response) => response.json());
+
           setMovies((movies) => [...movies, values]);
         }}>
         <Form className="flex-col">
-          <FormikField id="imdb_id" label="IMDb_id" placeholder="231" type="" />
-          <FormikField id="title" label="Title" placeholder="narnia" type="" />
-          <div className="flex space-x-3">
-            <FormikField id="rating" label="Rating" placeholder="9.1" type="" />
-            <FormikField id="year" label="Year" placeholder="1999" type="" />
-          </div>
-
-          <FormikField id="summary" label="Summary" placeholder="wee wee woo woo" type="" />
+          <FormikField id="imdb_id" label="IMDb_id" placeholder="tt0993846" type="" />
+          <FormikField id="title" label="Title" placeholder="The Wolf of Wall Street" type="" />
+          <FormikField id="rating" label="Rating" placeholder="8.2" type="" />
+          <FormikField id="year" label="Year" placeholder="2013" type="" />
+          <FormikField
+            id="summary"
+            label="Summary"
+            placeholder="Based on the true story of Jordan Belfort, from his rise to a wealthy stock-broker living the high life to his fall involving crime, corruption and the federal government."
+            type=""
+          />
           <button
             className="max-w-[160px] py-2 px-3 bg-blue-500 hover:bg-blue-700 text-white font-bold"
             type="submit">
