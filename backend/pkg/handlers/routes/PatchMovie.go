@@ -54,6 +54,7 @@ func (h handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 		Rating: movie.Rating, 
 		Plot_summary: movie.Plot_summary})
 
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode("Updated")

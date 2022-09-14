@@ -17,6 +17,7 @@ func (h handler) GetMovie(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 		json.NewEncoder(w).Encode(http.StatusNotFound)
 	} else {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(movie)

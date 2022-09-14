@@ -25,6 +25,7 @@ func (h handler) AddMovie(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(result.Error)
 	}
 
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 
