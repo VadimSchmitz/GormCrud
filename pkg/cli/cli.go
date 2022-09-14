@@ -38,26 +38,27 @@ func CliHandler(done chan bool) {
 		close(jobs)
 
 		for a := 1; a <= numJobs; a++ {
-			fmt.Printf("Wrote summary for %s to database\n", <-results)
+			// fmt.Printf("Wrote summary for %s to database\n", <-results)
+			<-results
 		}
 
+		fmt.Println("Summaries added")
 		done <- true
 	}
 }
 
 func FetchAndPatch(wId int, jobs <-chan *models.IMDb_id, results chan<- string) {
 	for imdb_id := range jobs {
-		fmt.Printf("Worker %d getting summary for %s \n", wId, imdb_id.IMDb_id)
+		// fmt.Printf("Worker %d getting summary for %s \n", wId, imdb_id.IMDb_id)
 
-		fmt.Println(imdb_id.IMDb_id)
 		omdbUrl := "http://www.omdbapi.com/?i=" + imdb_id.IMDb_id + "&apikey=183b9a26"
 		var plot *models.Plot
 
-		fmt.Printf("Worker %d received summary for %s \n", wId, imdb_id.IMDb_id)
+		// fmt.Printf("Worker %d received summary for %s \n", wId, imdb_id.IMDb_id)
 
 		h.ProcessRequest(omdbUrl, &plot)
 
-		var jsonStr = []byte(`{"plot": "` + plot.Plot_summary + `"}`)
+		var jsonStr = []byte(`{"summary": "` + plot.Plot_summary + `"}`)
 		req, _ := http.NewRequest("PATCH", "http://localhost:8090/movies/"+imdb_id.IMDb_id, bytes.NewBuffer(jsonStr))
 
 		client := &http.Client{}
