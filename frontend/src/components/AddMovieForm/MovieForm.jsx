@@ -20,6 +20,7 @@ export default function MovieForm({ setMovies }) {
             mode: "cors",
             body: JSON.stringify(values)
           };
+          console.log(requestOptions.body);
           fetch("http://localhost:8090/movies", requestOptions).then((response) => response.json());
 
           setMovies((movies) => [...movies, values]);
@@ -27,8 +28,8 @@ export default function MovieForm({ setMovies }) {
         <Form className="flex-col">
           <FormikField id="imdb_id" label="IMDb_id" placeholder="tt0993846" type="" />
           <FormikField id="title" label="Title" placeholder="The Wolf of Wall Street" type="" />
-          <FormikField id="rating" label="Rating" placeholder="8.2" type="" />
-          <FormikField id="year" label="Year" placeholder="2013" type="" />
+          <FormikField id="rating" label="Rating" placeholder="8.2" type="number" />
+          <FormikField id="year" label="Year" placeholder="2013" type="number" />
           <FormikField
             id="summary"
             label="Summary"
