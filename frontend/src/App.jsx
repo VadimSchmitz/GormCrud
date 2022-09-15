@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Content from "./components/Content/Content";
+import MovieSection from "./components/MovieSection/MovieSection";
 import MovieForm from "./components/AddMovieForm/MovieForm";
 import NavBar from "./components/NavBar/NavBar";
 
@@ -25,7 +25,7 @@ function App() {
         <hr></hr>
         <MovieForm setMovies={setMovies} />
         <hr></hr>
-        <Content movies={movies} />
+        <MovieSection movies={movies} />
       </div>
     </div>
   );
