@@ -30,7 +30,6 @@ export default function MovieForm({ setMovies }) {
             mode: "cors",
             body: JSON.stringify(values)
           };
-          console.log(requestOptions.body);
           fetch("http://localhost:8090/movies", requestOptions).then((response) => response.json());
 
           setMovies((movies) => [...movies, values]);

@@ -4,7 +4,7 @@ import PaginatedMovies from "./MovieEntry/PaginatedMovies";
 
 export default function Content({ movies }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage] = useState(5);
+  const [recordsPerPage] = useState(100);
 
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;

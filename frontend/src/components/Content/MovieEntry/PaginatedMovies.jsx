@@ -6,7 +6,7 @@ const PaginatedMovies = ({ data }) => {
       {data.map((movie, index) => (
         <MovieEntry
           key={index}
-          id={index}
+          id={movie.imdb_id}
           title={movie.title}
           rating={movie.rating}
           year={movie.year}

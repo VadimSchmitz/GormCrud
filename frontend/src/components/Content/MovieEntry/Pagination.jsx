@@ -11,27 +11,42 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
   };
 
   return (
-    <nav>
-      <ul className="pagination justify-content-center">
-        <li className="page-item">
-          <a className="page-link" onClick={prevPage}>
-            Previous
-          </a>
-        </li>
-        {pageNumbers.map((pgNumber) => (
-          <li key={pgNumber} className={`page-item ${currentPage == pgNumber ? "active" : ""} `}>
-            <a onClick={() => setCurrentPage(pgNumber)} className="page-link">
-              {pgNumber}
-            </a>
-          </li>
-        ))}
-        <li className="page-item">
-          <a className="page-link" onClick={nextPage}>
-            Next
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <div>
+      <div className="flex justify-center">
+        <nav>
+          <ul className="flex list-style-none">
+            <li className="page-item">
+              <button
+                onClick={prevPage}
+                className="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
+                Previous
+              </button>
+            </li>
+            {pageNumbers.map((pgNumber) => (
+              <li
+                onClick={() => setCurrentPage(pgNumber)}
+                className={`${
+                  currentPage == pgNumber
+                    ? "page-link relative block py-1.5 px-3 border-0 outline-none transition-all duration-300 rounded bg-blue-600 text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md"
+                    : "page-link relative block py-1.5 px-3 border-0 outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none "
+                }`}
+                key={pgNumber}>
+                <button>
+                  {pgNumber} <span className="visually-hidden">(current)</span>
+                </button>
+              </li>
+            ))}
+            <li className="page-item">
+              <button
+                onClick={nextPage}
+                className="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
+                Next
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   );
 };
 
