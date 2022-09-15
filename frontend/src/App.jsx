@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Content from "./components/Content/Content";
 import MovieForm from "./components/AddMovieForm/MovieForm";
 import NavBar from "./components/NavBar/NavBar";
+import FormikErr from "./components/AddMovieForm/FormikErr";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -23,6 +24,7 @@ function App() {
         <h1>Movies in the IMDb database</h1>
         <p>This is a list of all the movies currently stored in the database</p>
         <hr></hr>
+        <FormikErr />
         <MovieForm setMovies={setMovies} />
         <hr></hr>
         <Content movies={movies} />
