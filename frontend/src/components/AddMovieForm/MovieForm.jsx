@@ -37,20 +37,50 @@ export default function MovieForm({ setMovies }) {
         }}>
         {({ errors, touched }) => (
           <Form className="flex-col">
-            <FormikField id="imdb_id" label="IMDb_id" placeholder="tt0993846" type="" />
-            {errors.imdb_id && touched.imdb_id ? <p>{errors.imdb_id}</p> : null}
-            <FormikField id="title" label="Title" placeholder="The Wolf of Wall Street" type="" />
-            {errors.title && touched.title ? <div>{errors.title}</div> : null}
-            <FormikField id="rating" label="Rating" placeholder="8.2" type="" />
-            {errors.rating && touched.rating ? <div>{errors.rating}</div> : null}
-            <FormikField id="year" label="Year" placeholder="2013" type="" />
-            {errors.year && touched.year ? <div>{errors.year}</div> : null}
+            <FormikField
+              id="imdb_id"
+              label="IMDb_id"
+              placeholder="tt0993846"
+              type=""
+              error={errors.imdb_id}
+              touched={touched.imdb_id}
+            />
+            <FormikField
+              id="title"
+              label="Title"
+              placeholder="The Wolf of Wall Street"
+              type=""
+              error={errors.title}
+              touched={touched.title}
+            />
+
+            <FormikField
+              id="rating"
+              label="Rating"
+              placeholder="8.2"
+              type=""
+              error={errors.rating}
+              touched={touched.rating}
+            />
+
+            <FormikField
+              id="year"
+              label="Year"
+              placeholder="2013"
+              type=""
+              error={errors.year}
+              touched={touched.year}
+            />
+
             <FormikField
               id="summary"
               label="Summary"
               placeholder="Based on the true story of Jordan Belfort, from his rise to a wealthy stock-broker living the high life to his fall involving crime, corruption and the federal government."
               type=""
+              error={errors.summary}
+              touched={touched.summary}
             />
+
             <button
               className="max-w-[160px] py-2 px-3 bg-blue-500 hover:bg-blue-700 text-white font-bold"
               type="submit">
