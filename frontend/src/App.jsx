@@ -10,7 +10,7 @@ function App() {
     fetch("http://localhost:8090/movies")
       .then((res) => res.json())
       .then((data) => {
-        setMovies(data);
+        setMovies(data.reverse());
       });
   }, []);
 

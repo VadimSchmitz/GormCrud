@@ -5,12 +5,6 @@ import * as Yup from "yup";
 export default function MovieForm({ setMovies }) {
   const currentYear = new Date().getFullYear();
 
-  Yup.addMethod(Yup.array, "unique", function (message, mapper = (a) => a) {
-    return this.test("unique", message, function (list) {
-      return list.length === new Set(list.map(mapper)).size;
-    });
-  });
-
   const movieSchema = Yup.object().shape({
     imdb_id: Yup.string()
       .required("IMDb ID is required")
