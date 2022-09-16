@@ -22,7 +22,6 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
                 Prev
               </button>
             </li>
-            {console.log({ pageNumbers })}
             {pageNumbers.map((pageNumber) => (
               <li
                 onClick={() => setCurrentPage(pageNumber)}

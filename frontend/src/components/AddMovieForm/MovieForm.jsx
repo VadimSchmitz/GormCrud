@@ -3,12 +3,32 @@ import FormikField from "./FormikField";
 import * as Yup from "yup";
 
 export default function MovieForm({ setMovies }) {
+  const currentYear = new Date().getFullYear();
+
+  Yup.addMethod(Yup.array, "unique", function (message, mapper = (a) => a) {
+    return this.test("unique", message, function (list) {
+      return list.length === new Set(list.map(mapper)).size;
+    });
+  });
+
   const movieSchema = Yup.object().shape({
-    imdb_id: Yup.string().required("IMDb ID is required"),
-    title: Yup.string().required("Title is required"),
-    rating: Yup.number().required("Rating is required"),
-    year: Yup.number().required("Year is required"),
-    summary: Yup.string().required("Summary is required")
+    imdb_id: Yup.string()
+      .required("IMDb ID is required")
+      .typeError("you must specify a text")
+      .min(9, "The IMDb ID must be exactly 9 digits")
+      .max(9, "The IMDb ID must be exactly 9 digits"),
+    title: Yup.string().required("Title is required").typeError("you must specify a text"),
+    rating: Yup.number()
+      .required("Rating is required")
+      .typeError("you must specify a number")
+      .min(0, "Rating must be between 0 and 10")
+      .max(10, "Rating must be between 0 and 10"),
+    year: Yup.number()
+      .required("Year is required")
+      .typeError("you must specify a number")
+      .min(1888, `Year must be between 1888 and ${currentYear + 5}`)
+      .max(currentYear + 5, `Year must be between 1888 and ${currentYear + 5}`),
+    summary: Yup.string().required("Summary is required").typeError("you must specify a text")
   });
 
   return (
@@ -30,9 +50,10 @@ export default function MovieForm({ setMovies }) {
             mode: "cors",
             body: JSON.stringify(values)
           };
-          fetch("http://localhost:8090/movies", requestOptions).then((response) => response.json());
-
-          setMovies((movies) => [...movies, values]);
+          fetch("http://localhost:8090/movies", requestOptions)
+            .then((response) => response.json())
+            .then(setMovies((movies) => [values, ...movies]))
+            .then(console.log("Movie added"));
         }}>
         {({ errors, touched }) => (
           <Form className="flex-col">
