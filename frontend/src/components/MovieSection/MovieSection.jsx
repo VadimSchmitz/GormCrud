@@ -4,7 +4,7 @@ import PaginatedMovies from "./MovieEntry/PaginatedMovies";
 
 export default function Content({ movies }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage] = useState(100);
+  const [recordsPerPage] = useState(250);
 
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
@@ -22,12 +22,16 @@ export default function Content({ movies }) {
   return (
     <div>
       <h1> Movies </h1>
-      <PaginatedMovies data={currentRecords} />
+      <PaginatedMovies itemsPerPage={4} data={currentRecords} />
       <Pagination
         className="flex"
         nPages={nPages}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        breakLabel="..."
+        breakClassName="page-item"
       />
     </div>
   );

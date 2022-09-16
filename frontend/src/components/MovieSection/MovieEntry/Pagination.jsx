@@ -19,23 +19,25 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
               <button
                 onClick={prevPage}
                 className="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none">
-                Previous
+                Prev
               </button>
             </li>
-            {pageNumbers.map((pgNumber) => (
+            {console.log({ pageNumbers })}
+            {pageNumbers.map((pageNumber) => (
               <li
-                onClick={() => setCurrentPage(pgNumber)}
+                onClick={() => setCurrentPage(pageNumber)}
                 className={`${
-                  currentPage == pgNumber
+                  currentPage == pageNumber
                     ? "page-link relative block py-1.5 px-3 border-0 outline-none transition-all duration-300 rounded bg-blue-600 text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md"
                     : "page-link relative block py-1.5 px-3 border-0 outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none "
                 }`}
-                key={pgNumber}>
+                key={pageNumber}>
                 <button>
-                  {pgNumber} <span className="visually-hidden">(current)</span>
+                  {pageNumber} <span className="visually-hidden">(current)</span>
                 </button>
               </li>
             ))}
+
             <li className="page-item">
               <button
                 onClick={nextPage}
