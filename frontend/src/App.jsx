@@ -19,7 +19,7 @@ function App() {
       <div>
         <NavBar />
       </div>
-      <div className="content mx-auto bg-[#F8F8F8] p-5 w-9/12 mb-16">
+      <div className="content md:mx-auto bg-[#F8F8F8] p-5 mx-2 mb-2 md:w-9/12 md:mb-16">
         <h1>Movies in the IMDb database</h1>
         <p>This is a list of all the movies currently stored in the database</p>
         <hr></hr>
