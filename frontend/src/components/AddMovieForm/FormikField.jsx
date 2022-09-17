@@ -2,7 +2,7 @@ import { Field } from "formik";
 
 export default function FormikField({ id, label, placeholder, type, error, touched }) {
   return (
-    <div className="flex-col mb-3 w-auto">
+    <div className="mb-3 ">
       <label className="block text-gray-700 text-sm font-bold mb-[1px]" htmlFor={id}>
         {label}
       </label>
@@ -14,8 +14,8 @@ export default function FormikField({ id, label, placeholder, type, error, touch
           placeholder={placeholder}
           type={type}
         />
-        {error && touched ? <p className="my-auto ml-2 text-red-600">{error}</p> : null}
       </div>
+      {error && touched ? <p className="my-auto text-red-600">{error}</p> : null}
     </div>
   );
 }

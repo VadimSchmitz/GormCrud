@@ -1,5 +1,5 @@
 package models
 
 type Plot struct {
-	Plot_summary string `json:"Plot"`
+	Plot_summary string `json:"summary"`
 }
