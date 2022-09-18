@@ -2,12 +2,11 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
-	"log"
 	"net/http"
 
 	"github.com/VadimSchmitz/GormCrud/pkg/models"
+	"github.com/VadimSchmitz/GormCrud/pkg/util"
 	"github.com/gorilla/mux"
 )
 
@@ -18,9 +17,7 @@ func (h handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	body, err := io.ReadAll(r.Body)
 
-	if err != nil {
-		log.Fatalln(err)
-	}
+	util.CheckErr(err)
 
 	var updatedMovie models.Movie
 	json.Unmarshal(body, &updatedMovie)
@@ -28,7 +25,8 @@ func (h handler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 	var movie models.Movie
 
 	if result := h.DB.Where("imdb_id = ?", id).Find(&movie); result.Error != nil {
-		fmt.Println(result.Error)
+		w.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(w).Encode(result.Error)
 	}
 
 	if updatedMovie.IMDb_id != "" {

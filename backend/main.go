@@ -16,7 +16,7 @@ func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/movies", h.GetAllMovies).Methods(http.MethodGet)
 	router.HandleFunc("/movies/{id}", h.GetMovie).Methods(http.MethodGet)
-	router.HandleFunc("/ids", h.GetAllMovieTitles).Methods(http.MethodGet)
+	router.HandleFunc("/ids", h.GetAllMovieIds).Methods(http.MethodGet)
 	
 	router.HandleFunc("/movieid", h.AddMovieWithId).Methods(http.MethodPost)
 	router.HandleFunc("/movies", h.AddMovie).Methods(http.MethodPost)

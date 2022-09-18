@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/VadimSchmitz/GormCrud/pkg/models"
@@ -12,7 +11,8 @@ func (h handler) GetAllMovies(w http.ResponseWriter, r *http.Request) {
 	var movies []models.Movie
 
 	if result := h.DB.Find(&movies); result.Error != nil {
-		fmt.Println(result.Error)
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(result.Error)
 	}
 
 	w.Header().Set("Access-Control-Allow-Origin", "*")

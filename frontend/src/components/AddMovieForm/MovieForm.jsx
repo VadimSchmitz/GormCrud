@@ -1,8 +1,14 @@
 import { Formik, Form } from "formik";
+import { useState } from "react";
 import FormikField from "./FormikField";
 import * as Yup from "yup";
+import "./MovieForm.css";
 
 export default function MovieForm({ setMovies }) {
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [isShowingAlert, setShowingAlert] = useState(false);
+
   const movieSchema = Yup.object().shape({
     imdb_id: Yup.string()
       .required("IMDb ID is required")
@@ -15,13 +21,17 @@ export default function MovieForm({ setMovies }) {
   return (
     <div>
       <h1>Add a movie</h1>
-      <p>Just give the IMDb id abd we will handle the rest.</p>
+      <p>Just give the IMDb id and we will handle the rest.</p>
       <Formik
         initialValues={{
           imdb_id: ""
         }}
         validationSchema={movieSchema}
         onSubmit={async (values) => {
+          setShowingAlert(true);
+          setSuccess(null);
+          setError(null);
+
           await new Promise((r) => setTimeout(r, 20));
           const requestOptions = {
             method: "POST",
@@ -29,9 +39,19 @@ export default function MovieForm({ setMovies }) {
             body: JSON.stringify(values)
           };
           fetch("http://localhost:8090/movieid", requestOptions)
-            .then((response) => response.json())
+            .then((response) => {
+              if (response.status == 422) {
+                setError(`The movie with the ID ${values.imdb_id} already exists`);
+              }
+              if (response.status == 201) {
+                return response.json();
+              }
+            })
             .then((data) => {
-              setMovies((movies) => [data, ...movies]);
+              if (data) {
+                setSuccess(`The movie ${data.title} was added successfully`);
+                setMovies((movies) => [data, ...movies]);
+              }
             });
         }}>
         {({ errors, touched }) => (
@@ -45,10 +65,16 @@ export default function MovieForm({ setMovies }) {
               touched={touched.imdb_id}
             />
             <button
-              className="max-w-[160px] py-2 px-3 bg-blue-500 hover:bg-blue-700 text-white font-bold"
+              className="max-w-[160px] my-1 py-2 px-3 bg-blue-500 hover:bg-blue-700 text-white font-bold"
               type="submit">
               Add a movie
             </button>
+            <div
+              className={`alert alert-success ${isShowingAlert ? "alert-shown" : "alert-hidden"}`}
+              onTransitionEnd={() => setShowingAlert(false)}>
+              {<p className="relative text-green-600">{success}</p>}
+              {<p className="relative text-red-600">{error}</p>}
+            </div>
           </Form>
         )}
       </Formik>

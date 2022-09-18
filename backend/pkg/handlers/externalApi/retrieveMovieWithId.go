@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/VadimSchmitz/GormCrud/pkg/models"
+	e "github.com/VadimSchmitz/GormCrud/pkg/models/external"
 	"github.com/VadimSchmitz/GormCrud/pkg/util"
 )
 
@@ -18,7 +19,7 @@ func RetrieveMovieWithId(url string, movie *models.Movie) {
 	body, err := io.ReadAll(response.Body)
 	util.CheckErr(err)
 
-	var omdb_body models.Omdb_body
+	var omdb_body e.Omdb_body
 	err = json.Unmarshal(body, &omdb_body)
 
 	movie.IMDb_id = omdb_body.IMDb_id

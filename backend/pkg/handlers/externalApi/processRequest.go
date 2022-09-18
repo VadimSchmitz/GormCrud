@@ -18,5 +18,6 @@ func ProcessRequest(url string, arr interface{}) {
 	util.CheckErr(err)
 
 	err = json.Unmarshal(body, &arr)
+
 	util.CheckErr(err)
 }

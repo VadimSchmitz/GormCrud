@@ -8,6 +8,7 @@ import (
 
 	h "github.com/VadimSchmitz/GormCrud/pkg/handlers/externalApi"
 	"github.com/VadimSchmitz/GormCrud/pkg/models"
+	e "github.com/VadimSchmitz/GormCrud/pkg/models/external"
 )
 
 func CliHandler(done chan bool) {
@@ -51,8 +52,8 @@ func FetchAndPatch(wId int, jobs <-chan *models.IMDb_id, results chan<- string) 
 	for imdb_id := range jobs {
 		// fmt.Printf("Worker %d getting summary for %s \n", wId, imdb_id.IMDb_id)
 
-		omdbUrl := "http://www.omdbapi.com/?i=" + imdb_id.IMDb_id + "&apikey=183b9a26"
-		var plot *models.Plot
+		omdbUrl := "http://www.omdbapi.com/?i=" + imdb_id.IMDb_id + "&apikey=f7e4139c"
+		var plot *e.Plot
 
 		// fmt.Printf("Worker %d received summary for %s \n", wId, imdb_id.IMDb_id)
 
