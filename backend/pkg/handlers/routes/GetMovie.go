@@ -7,12 +7,13 @@ import (
 	"github.com/VadimSchmitz/GormCrud/pkg/models"
 	"github.com/gorilla/mux"
 )
+
 func (h handler) GetMovie(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
 	var movie models.Movie
-	
+
 	if result := h.DB.Where("imdb_id = ?", id).First(&movie); result.Error != nil {
 		w.WriteHeader(http.StatusNotFound)
 		json.NewEncoder(w).Encode(http.StatusNotFound)
